@@ -1,3 +1,4 @@
+
 """
 Controller for routes
 """
@@ -10,6 +11,8 @@ COUNTER = {}
 ############################################################
 # Health Endpoint
 ############################################################
+
+
 @app.route("/health")
 def health():
     """Health Status"""
@@ -17,32 +20,21 @@ def health():
 
 
 ############################################################
-# Index page
-############################################################
-@app.route("/")
-def index():
-    """Returns information about the service"""
-    app.logger.info("Request for Base URL")
-    return jsonify(
-        status=status.HTTP_200_OK,
-        message="Hit Counter Service",
-        version="1.0.0",
-        url=url_for("list_counters", _external=True),
-    )
-
-
-############################################################
 # List counters
 ############################################################
+
+
 @app.route("/counters", methods=["GET"])
 def list_counters():
     """Lists all counters"""
     app.logger.info("Request to list all counters...")
 
-    counters = [dict(name=count[0], counter=count[1]) for count in COUNTER.items()]
+    counters = [
+        dict(name=count[0], counter=count[1])
+        for count in COUNTER.items()
+    ]
 
     return jsonify(counters)
-
 
 ############################################################
 # Create counters
