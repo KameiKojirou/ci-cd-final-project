@@ -33,7 +33,6 @@ kind: Task
 metadata:
   name: nose
 spec:
-  description: This task runs nose tests.
   workspaces:
     - name: source
   params:
@@ -50,5 +49,5 @@ spec:
         set -e
         python -m pip install --upgrade pip wheel
         pip install -r requirements.txt
-        echo "Executing: nosetests $(params.args)"
-        nosetests "$(params.args)"
+        nosetests $(params.args)
+
